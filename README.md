@@ -1,3 +1,25 @@
+> ### Fork notes
+>
+> Fork of [al090187/esphome_samsung_ac](https://github.com/al090187/esphome_samsung_ac)
+> (itself a fork of [kumy/esphome_samsung_ac](https://github.com/kumy/esphome_samsung_ac)),
+> adding **ESP8266 / Arduino framework support**.
+>
+> `Arduino.h` on ESP8266 defines `HIGH` and `LOW` as preprocessor macros, which breaks the
+> `FAN` and `MODE` enum declarations in `samsung_climate_mode.h`. Upstream targets
+> ESP32/ESP-IDF, where `Arduino.h` is not included, so the clash never appeared there.
+> This fork `#undef`s both macros before the enums.
+>
+> Verified with ESPHome 2026.8.2 on `board: esp12e` (SLWF-01 Pro): compiles clean,
+> RAM 38.4%, Flash 31.4%.
+>
+> ```yaml
+> external_components:
+>   - source:
+>       type: git
+>       url: https://github.com/spoof54/esphome_samsung_ac
+>     components: [samsung_ac]
+> ```
+
 # ESPHome component for Samsung AC
 
 Should be compatible with models Samsung AR24HSFSAWKN and other models using the same protocol.
