@@ -4,6 +4,14 @@
 #include "esphome/core/log.h"
 #include "esphome/components/climate/climate.h"
 
+// L'Arduino ESP8266 definit HIGH/LOW comme macros, ce qui casse les enums FAN/MODE
+#ifdef HIGH
+#undef HIGH
+#endif
+#ifdef LOW
+#undef LOW
+#endif
+
 namespace esphome
 {
   namespace samsung_ac
